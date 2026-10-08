@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "harnessVersion": "1.0.0",
+  "runId": "deny20261008a",
+  "nameSuffix": "eny20261008a",
+  "subscriptionId": "3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a",
+  "subscriptionName": "covallen3-dnstest",
+  "location": "canadacentral",
+  "resourceGroup": "rg-public-ip-deny-eny20261008a",
+  "status": "Failed",
+  "completedAt": "2026-10-08T17:43:06.8958912Z",
+  "error": "Azure CLI failed: az deployment sub create --name deny-public-ip-policy-eny20261008a --location canadacentral --template-file C:\\Code\\DenyPublicIPPolicy\\tests\\deny\\policy-subscription.bicep --parameters nameSuffix=eny20261008a --subscription 3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a\nERROR: {\"status\":\"Failed\",\"error\":{\"code\":\"DeploymentFailed\",\"target\":\"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/providers/Microsoft.Resources/deployments/deny-public-ip-policy-eny20261008a\",\"message\":\"At least one resource deployment operation failed. Please list deployment operations for details. Please see https://aka.ms/arm-deployment-operations for usage details.\",\"details\":[{\"code\":\"InvalidCountExpression\",\"message\":\"The policy definition 'audit-deny-load-balancer-public-frontend-eny20261008a' rule is invalid. The field value: 'Microsoft.Network/loadBalancers/frontendIPConfigurations[*].publicIPAddress.id' used in 'count.field' is not an alias, or it is an alias for non-array property. Only aliases ending with '[*]' are allowed in 'count.field'.\"},{\"code\":\"InvalidCountExpression\",\"message\":\"The policy definition 'audit-deny-vpn-gateway-public-ip-eny20261008a' rule is invalid. The field value: 'Microsoft.Network/virtualNetworkGateways/ipConfigurations[*].publicIPAddress.id' used in 'count.field' is not an alias, or it is an alias for non-array property. Only aliases ending with '[*]' are allowed in 'count.field'.\"},{\"code\":\"InvalidCountExpression\",\"message\":\"The policy definition 'audit-deny-azure-firewall-public-ip-eny20261008a' rule is invalid. The field value: 'Microsoft.Network/azureFirewalls/ipConfigurations[*].publicIPAddress.id' used in 'count.field' is not an alias, or it is an alias for non-array property. Only aliases ending with '[*]' are allowed in 'count.field'.\"},{\"code\":\"InvalidCountExpression\",\"message\":\"The policy definition 'audit-deny-application-gateway-public-ip-eny20261008a' rule is invalid. The field value: 'Microsoft.Network/applicationGateways/frontendIPConfigurations[*].publicIPAddress.id' used in 'count.field' is not an alias, or it is an alias for non-array property. Only aliases ending with '[*]' are allowed in 'count.field'.\"}]}}",
+  "summary": {
+    "total": 0,
+    "passed": 0,
+    "failed": 0
+  },
+  "policy": null,
+  "assignment": null,
+  "customDefinitions": [],
+  "tools": {
+    "azureCli": "2.86.0",
+    "azureCliCore": "2.86.0",
+    "bicep": "Bicep CLI version 0.44.1 (28275db947)",
+    "powershell": "7.6.6",
+    "gitCommit": null
+  },
+  "artifactSha256": {
+    "main.bicep": "d9c3b5423af83b964744e8d0090f0a6f196564891b8abe2777e29c988648fc90",
+    "main.bicepparam": "279f6644b3e0baa89a41751673ad3d61f4420e56084dbbc4523057f5a90f1125",
+    "built-in-audit-public-network-access.json": "9925d52f644cfd78e26d82233d48e0cd8edefccd749de28c638ff5ae10013842",
+    "custom-policy-definitions.json": "6a1978e7954cf8bc138be14bd05d7eb2bea91d410797f76b10c9f498e4aa5e01",
+    "tests/deny/policy-subscription.bicep": "600c91f09a65e5fe6e5ae7fde24bcaafb6ee92fc569c2999381bfe4adefd7e3d",
+    "tests/deny/test-resources.bicep": "d3ce930067e93b944be7cc4813cf20980f53f29cd4ca88144a2311826853a3e1",
+    "tests/deny/test-matrix.json": "d51d4c6d21a382ba3c4ee5cbc10cfa9438f4a657000029500ffd95e293e747de"
+  },
+  "testCases": []
+}

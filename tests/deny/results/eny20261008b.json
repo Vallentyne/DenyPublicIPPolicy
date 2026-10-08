@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 1,
+  "harnessVersion": "1.0.0",
+  "runId": "deny20261008b",
+  "nameSuffix": "eny20261008b",
+  "subscriptionId": "3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a",
+  "subscriptionName": "covallen3-dnstest",
+  "location": "canadacentral",
+  "resourceGroup": "rg-public-ip-deny-eny20261008b",
+  "status": "Passed",
+  "completedAt": "2026-10-08T17:51:36.8717816Z",
+  "error": "",
+  "summary": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0
+  },
+  "policy": {
+    "id": "/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/providers/Microsoft.Authorization/policySetDefinitions/deny-public-ip-smoke-eny20261008b",
+    "name": "deny-public-ip-smoke-eny20261008b",
+    "displayName": "Deny Public Network Access - Test eny20261008b",
+    "metadataVersion": "1.0.0-test",
+    "sourcePolicySetDefinitionId": "/providers/Microsoft.Authorization/policySetDefinitions/f1535064-3294-48fa-94e2-6e83095a5c08",
+    "sourcePolicySetDefinitionVersion": "4.3.0",
+    "parameterCount": 41,
+    "policyReferenceCount": 39
+  },
+  "assignment": {
+    "id": "/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/resourceGroups/rg-public-ip-deny-eny20261008b/providers/Microsoft.Authorization/policyAssignments/deny-public-ip-eny20261008b",
+    "name": "deny-public-ip-eny20261008b",
+    "enforcementMode": "Default",
+    "scope": "/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/resourceGroups/rg-public-ip-deny-eny20261008b",
+    "parameters": {
+      "Effect-ApiManagement": "Deny",
+      "Effect-AppServiceEnvironment": "Deny",
+      "Effect-ApplicationGateway": "Deny",
+      "Effect-AzureFirewall": "Deny",
+      "Effect-AzureMonitorPrivateLinkScopes": "Deny",
+      "Effect-ExternalLoadBalancer": "Deny",
+      "Effect-Microsoft.AppConfiguration-configurationStores": "Deny",
+      "Effect-Microsoft.Attestation-attestationProviders": "Deny",
+      "Effect-Microsoft.Automation-automationAccounts": "Deny",
+      "Effect-Microsoft.Batch-batchAccounts": "Deny",
+      "Effect-Microsoft.BotService-botServices": "Deny",
+      "Effect-Microsoft.Cache-Redis": "Deny",
+      "Effect-Microsoft.CognitiveServices-accounts": "Deny",
+      "Effect-Microsoft.Compute-disks": "Audit",
+      "Effect-Microsoft.ContainerRegistry-registries": "Deny",
+      "Effect-Microsoft.DBforMariaDB-servers": "Deny",
+      "Effect-Microsoft.DBforMySQL-flexibleServers": "Deny",
+      "Effect-Microsoft.DBforMySQL-servers": "Deny",
+      "Effect-Microsoft.DBforPostgreSQL-flexibleServers": "Deny",
+      "Effect-Microsoft.DBforPostgreSQL-servers": "Deny",
+      "Effect-Microsoft.DataFactory-factories": "Deny",
+      "Effect-Microsoft.Databricks-workspaces": "Deny",
+      "Effect-Microsoft.Devices-IotHubProvisioningService": "Deny",
+      "Effect-Microsoft.Devices-IotHubs": "Deny",
+      "Effect-Microsoft.DocumentDB-databaseAccounts": "Deny",
+      "Effect-Microsoft.EventGrid-domains": "Deny",
+      "Effect-Microsoft.EventGrid-topics": "Deny",
+      "Effect-Microsoft.HybridCompute-privateLinkScopes": "Deny",
+      "Effect-Microsoft.Insights-applicationInsights": "Deny",
+      "Effect-Microsoft.KeyVault-vaults": "Deny",
+      "Effect-Microsoft.MachineLearningServices-workspaces": "Deny",
+      "Effect-Microsoft.Media-mediaServices": "Deny",
+      "Effect-Microsoft.OperationalInsights-LogAnalytics": "Deny",
+      "Effect-Microsoft.SQL-servers": "Deny",
+      "Effect-Microsoft.Search-searchServices": "Deny",
+      "Effect-Microsoft.ServiceBus-namespaces": "Deny",
+      "Effect-Microsoft.SignalRService-SignalR": "Deny",
+      "Effect-Microsoft.SignalRService-webPubSub": "Deny",
+      "Effect-Microsoft.Storage-storageAccounts": "Deny",
+      "Effect-Microsoft.Synapse-workspaces": "Deny",
+      "Effect-VpnGateway": "Deny"
+    }
+  },
+  "customDefinitions": [
+    {
+      "id": "/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/providers/Microsoft.Authorization/policyDefinitions/audit-deny-apim-public-network-access-eny20261008b",
+      "name": "audit-deny-apim-public-network-access-eny20261008b",
+      "displayName": "API Management services should disable public network access",
+      "version": "1.0.0"
+    },
+    {
+      "id": "/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/providers/Microsoft.Authorization/policyDefinitions/audit-deny-application-gateway-public-ip-eny20261008b",
+      "name": "audit-deny-application-gateway-public-ip-eny20261008b",
+      "displayName": "Application Gateways should not use public frontend IP addresses",
+      "version": "1.0.0"
+    },
+    {
+      "id": "/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/providers/Microsoft.Authorization/policyDefinitions/audit-deny-azure-firewall-public-ip-eny20261008b",
+      "name": "audit-deny-azure-firewall-public-ip-eny20261008b",
+      "displayName": "Azure Firewalls should not use public IP addresses",
+      "version": "1.0.0"
+    },
+    {
+      "id": "/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/providers/Microsoft.Authorization/policyDefinitions/audit-deny-load-balancer-public-frontend-eny20261008b",
+      "name": "audit-deny-load-balancer-public-frontend-eny20261008b",
+      "displayName": "Load Balancers should not use public frontend IP configurations",
+      "version": "1.0.0"
+    },
+    {
+      "id": "/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/providers/Microsoft.Authorization/policyDefinitions/audit-deny-vpn-gateway-public-ip-eny20261008b",
+      "name": "audit-deny-vpn-gateway-public-ip-eny20261008b",
+      "displayName": "Azure VPN gateways should not use public IP addresses",
+      "version": "1.0.0"
+    }
+  ],
+  "tools": {
+    "azureCli": "2.86.0",
+    "azureCliCore": "2.86.0",
+    "bicep": "Bicep CLI version 0.44.1 (28275db947)",
+    "powershell": "7.6.6",
+    "gitCommit": null
+  },
+  "artifactSha256": {
+    "main.bicep": "d9c3b5423af83b964744e8d0090f0a6f196564891b8abe2777e29c988648fc90",
+    "main.bicepparam": "279f6644b3e0baa89a41751673ad3d61f4420e56084dbbc4523057f5a90f1125",
+    "built-in-audit-public-network-access.json": "9925d52f644cfd78e26d82233d48e0cd8edefccd749de28c638ff5ae10013842",
+    "custom-policy-definitions.json": "ee1f959e49c78b2a6a0a2b8d528e1a55a7d795c77ddd171f0c1372ab3736360c",
+    "tests/deny/policy-subscription.bicep": "600c91f09a65e5fe6e5ae7fde24bcaafb6ee92fc569c2999381bfe4adefd7e3d",
+    "tests/deny/test-resources.bicep": "d3ce930067e93b944be7cc4813cf20980f53f29cd4ca88144a2311826853a3e1",
+    "tests/deny/test-matrix.json": "d51d4c6d21a382ba3c4ee5cbc10cfa9438f4a657000029500ffd95e293e747de"
+  },
+  "testCases": [
+    {
+      "key": "loadBalancer",
+      "description": "External Standard Load Balancer with a public frontend IP configuration",
+      "resourceType": "Microsoft.Network/loadBalancers",
+      "expectedOutcome": "Denied",
+      "actualOutcome": "Denied",
+      "status": "Passed",
+      "expectedPolicyDefinitionName": "audit-deny-load-balancer-public-frontend-eny20261008b",
+      "deploymentName": "deny-loadBalancer-eny20261008b",
+      "startedAt": "2026-10-08T17:50:43.6095870Z",
+      "completedAt": "2026-10-08T17:51:05.5897720Z",
+      "durationSeconds": 21.98,
+      "azureCliExitCode": 1,
+      "errorCode": "InvalidTemplateDeployment",
+      "evidence": "ERROR: {\"code\": \"InvalidTemplateDeployment\", \"message\": \"The template deployment failed because of policy violation. Please see details for more information.\"}\r\n\r\nInner Errors: \r\n{\"code\": \"RequestDisallowedByPolicy\", \"target\": \"lb-deny-eny20261008b\", \"message\": \"Resource 'lb-deny-eny20261008b' was disallowed by policy. Policy identifiers: '[{\\\"policyAssignment\\\":{\\\"name\\\":\\\"Public IP deny test eny20261008b\\\",\\\"id\\\":\\\"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/resourceGroups/rg-public-ip-deny-eny20261008b/providers/Microsoft.Authorization/policyAssignments/deny-public-ip-eny20261008b\\\"},\\\"policyDefinition\\\":{\\\"name\\\":\\\"Load Balancers should not use public frontend IP configurations\\\",\\\"id\\\":\\\"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/providers/Microsoft.Authorization/policyDefinitions/audit-deny-load-balancer-public-frontend-eny20261008b\\\",\\\"version\\\":\\\"1.0.0\\\"},\\\"policySetDefinition\\\":{\\\"name\\\":\\\"Deny Public Network Access - Test eny20261008b\\\",\\\"id\\\":\\\"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/providers/Microsoft.Authorization/policySetDefinitions/deny-public-ip-smoke-eny20261008b\\\",\\\"version\\\":\\\"1.0.0\\\"}}]'.\", \"additionalInfo\": [{\"type\": \"PolicyViolation\", \"info\": {\"evaluationDetails\": {\"evaluatedExpressions\": [{\"result\": \"True\", \"expressionKind\": \"Field\", \"expression\": \"type\", \"path\": \"type\", \"expressionValue\": \"Microsoft.Network/loadBalancers\", \"targetValue\": \"Microsoft.Network/loadBalancers\", \"operator\": \"Equals\"}, {\"result\": \"True\", \"expressionKind\": \"Field\", \"expression\": \"Microsoft.Network/loadBalancers/frontendIPConfigurations[*].publicIPAddress.id\", \"path\": \"properties.frontendIPConfigurations[*].properties.publicIPAddress.id\", \"expressionValue\": \"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/resourceGroups/rg-public-ip-deny-eny20261008b/providers/Microsoft.Network/publicIPAddresses/pip-loadBalancer-eny20261008b\", \"targetValue\": \"True\", \"operator\": \"Exists\"}]}, \"policyDefinitionId\": \"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/providers/Microsoft.Authorization/policyDefinitions/audit-deny-load-balancer-public-frontend-eny20261008b\", \"policySetDefinitionId\": \"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/providers/Microsoft.Authorization/policySetDefinitions/deny-public-ip-smoke-eny20261008b\", \"policyDefinitionReferenceId\": \"AuditDenyExternalLoadBalancerPublicFrontend\", \"policySetDefinitionName\": \"deny-public-ip-smoke-eny20261008b\", \"policySetDefinitionDisplayName\": \"Deny Public Network Access - Test eny20261008b\", \"policySetDefinitionVersion\": \"1.0.0\", \"policyDefinitionName\": \"audit-deny-load-balancer-public-frontend-eny20261008b\", \"policyDefinitionDisplayName\": \"Load Balancers should not use public frontend IP configurations\", \"policyDefinitionVersion\": \"1.0.0\", \"policyDefinitionEffect\": \"Deny\", \"policyAssignmentId\": \"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/resourceGroups/rg-public-ip-deny-eny20261008b/providers/Microsoft.Authorization/policyAssignments/deny-public-ip-eny20261008b\", \"policyAssignmentName\": \"deny-public-ip-eny20261008b\", \"policyAssignmentDisplayName\": \"Public IP deny test eny20261008b\", \"policyAssignmentScope\": \"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/resourceGroups/rg-public-ip-deny-eny20261008b\", \"policyAssignmentParameters\": {\"effect-ApiManagement\": \"Deny\", \"effect-AppServiceEnvironment\": \"Deny\", \"effect-ApplicationGateway\": \"Deny\", \"effect-AzureFirewall\": \"Deny\", \"effect-AzureMonitorPrivateLinkScopes\": \"Deny\", \"effect-ExternalLoadBalancer\": \"Deny\", \"effect-Microsoft.AppConfiguration-configurationStores\": \"Deny\", \"effect-Microsoft.Attestation-attestationProviders\": \"Deny\", \"effect-Microsoft.Automation-automationAccounts\": \"Deny\", \"effect-Microsoft.Batch-batchAccounts\": \"Deny\", \"effect-Microsoft.BotService-botServices\": \"Deny\", \"effect-Microsoft.Cache-Redis\": \"Deny\", \"effect-Microsoft.CognitiveServices-accounts\": \"Deny\", \"effect-Microsoft.Compute-disks\": \"Audit\", \"effect-Microsoft.ContainerRegistry-registries\": \"Deny\", \"effect-Microsoft.DBforMariaDB-servers\": \"Deny\", \"effect-Microsoft.DBforMySQL-flexibleServers\": \"Deny\", \"effect-Microsoft.DBforMySQL-servers\": \"Deny\", \"effect-Microsoft.DBforPostgreSQL-flexibleServers\": \"Deny\", \"effect-Microsoft.DBforPostgreSQL-servers\": \"Deny\", \"effect-Microsoft.DataFactory-factories\": \"Deny\", \"effect-Microsoft.Databricks-workspaces\": \"Deny\", \"effect-Microsoft.Devices-IotHubProvisioningService\": \"Deny\", \"effect-Microsoft.Devices-IotHubs\": \"Deny\", \"effect-Microsoft.DocumentDB-databaseAccounts\": \"Deny\", \"effect-Microsoft.EventGrid-domains\": \"Deny\", \"effect-Microsoft.EventGrid-topics\": \"Deny\", \"effect-Microsoft.HybridCompute-privateLinkScopes\": \"Deny\", \"effect-Microsoft.Insights-applicationInsights\": \"Deny\", \"effect-Microsoft.KeyVault-vaults\": \"Deny\", \"effect-Microsoft.MachineLearningServices-workspaces\": \"Deny\", \"effect-Microsoft.Media-mediaServices\": \"Deny\", \"effect-Microsoft.OperationalInsights-LogAnalytics\": \"Deny\", \"effect-Microsoft.SQL-servers\": \"Deny\", \"effect-Microsoft.Search-searchServices\": \"Deny\", \"effect-Microsoft.ServiceBus-namespaces\": \"Deny\", \"effect-Microsoft.SignalRService-SignalR\": \"Deny\", \"effect-Microsoft.SignalRService-webPubSub\": \"Deny\", \"effect-Microsoft.Storage-storageAccounts\": \"Deny\", \"effect-Microsoft.Synapse-workspaces\": \"Deny\", \"effect-VpnGateway\": \"Deny\"}, \"policyExemptionIds\": [], \"policyEnrollmentIds\": []}}]}"
+    },
+    {
+      "key": "applicationGateway",
+      "description": "Standard_v2 Application Gateway with a public frontend IP configuration",
+      "resourceType": "Microsoft.Network/applicationGateways",
+      "expectedOutcome": "Denied",
+      "actualOutcome": "Denied",
+      "status": "Passed",
+      "expectedPolicyDefinitionName": "audit-deny-application-gateway-public-ip-eny20261008b",
+      "deploymentName": "deny-applicationGateway-eny20261008b",
+      "startedAt": "2026-10-08T17:51:05.6058216Z",
+      "completedAt": "2026-10-08T17:51:21.3929179Z",
+      "durationSeconds": 15.787,
+      "azureCliExitCode": 1,
+      "errorCode": "InvalidTemplateDeployment",
+      "evidence": "ERROR: {\"code\": \"InvalidTemplateDeployment\", \"message\": \"The template deployment failed because of policy violation. Please see details for more information.\"}\r\n\r\nInner Errors: \r\n{\"code\": \"RequestDisallowedByPolicy\", \"target\": \"agw-deny-eny20261008b\", \"message\": \"Resource 'agw-deny-eny20261008b' was disallowed by policy. Policy identifiers: '[{\\\"policyAssignment\\\":{\\\"name\\\":\\\"Public IP deny test eny20261008b\\\",\\\"id\\\":\\\"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/resourceGroups/rg-public-ip-deny-eny20261008b/providers/Microsoft.Authorization/policyAssignments/deny-public-ip-eny20261008b\\\"},\\\"policyDefinition\\\":{\\\"name\\\":\\\"Application Gateways should not use public frontend IP addresses\\\",\\\"id\\\":\\\"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/providers/Microsoft.Authorization/policyDefinitions/audit-deny-application-gateway-public-ip-eny20261008b\\\",\\\"version\\\":\\\"1.0.0\\\"},\\\"policySetDefinition\\\":{\\\"name\\\":\\\"Deny Public Network Access - Test eny20261008b\\\",\\\"id\\\":\\\"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/providers/Microsoft.Authorization/policySetDefinitions/deny-public-ip-smoke-eny20261008b\\\",\\\"version\\\":\\\"1.0.0\\\"}}]'.\", \"additionalInfo\": [{\"type\": \"PolicyViolation\", \"info\": {\"evaluationDetails\": {\"evaluatedExpressions\": [{\"result\": \"True\", \"expressionKind\": \"Field\", \"expression\": \"type\", \"path\": \"type\", \"expressionValue\": \"Microsoft.Network/applicationGateways\", \"targetValue\": \"Microsoft.Network/applicationGateways\", \"operator\": \"Equals\"}, {\"result\": \"True\", \"expressionKind\": \"Field\", \"expression\": \"Microsoft.Network/applicationGateways/frontendIPConfigurations[*].publicIPAddress.id\", \"path\": \"properties.frontendIPConfigurations[*].properties.publicIPAddress.id\", \"expressionValue\": \"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/resourceGroups/rg-public-ip-deny-eny20261008b/providers/Microsoft.Network/publicIPAddresses/pip-applicationGateway-eny20261008b\", \"targetValue\": \"True\", \"operator\": \"Exists\"}]}, \"policyDefinitionId\": \"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/providers/Microsoft.Authorization/policyDefinitions/audit-deny-application-gateway-public-ip-eny20261008b\", \"policySetDefinitionId\": \"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/providers/Microsoft.Authorization/policySetDefinitions/deny-public-ip-smoke-eny20261008b\", \"policyDefinitionReferenceId\": \"AuditDenyApplicationGatewayPublicIp\", \"policySetDefinitionName\": \"deny-public-ip-smoke-eny20261008b\", \"policySetDefinitionDisplayName\": \"Deny Public Network Access - Test eny20261008b\", \"policySetDefinitionVersion\": \"1.0.0\", \"policyDefinitionName\": \"audit-deny-application-gateway-public-ip-eny20261008b\", \"policyDefinitionDisplayName\": \"Application Gateways should not use public frontend IP addresses\", \"policyDefinitionVersion\": \"1.0.0\", \"policyDefinitionEffect\": \"Deny\", \"policyAssignmentId\": \"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/resourceGroups/rg-public-ip-deny-eny20261008b/providers/Microsoft.Authorization/policyAssignments/deny-public-ip-eny20261008b\", \"policyAssignmentName\": \"deny-public-ip-eny20261008b\", \"policyAssignmentDisplayName\": \"Public IP deny test eny20261008b\", \"policyAssignmentScope\": \"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/resourceGroups/rg-public-ip-deny-eny20261008b\", \"policyAssignmentParameters\": {\"effect-ApiManagement\": \"Deny\", \"effect-AppServiceEnvironment\": \"Deny\", \"effect-ApplicationGateway\": \"Deny\", \"effect-AzureFirewall\": \"Deny\", \"effect-AzureMonitorPrivateLinkScopes\": \"Deny\", \"effect-ExternalLoadBalancer\": \"Deny\", \"effect-Microsoft.AppConfiguration-configurationStores\": \"Deny\", \"effect-Microsoft.Attestation-attestationProviders\": \"Deny\", \"effect-Microsoft.Automation-automationAccounts\": \"Deny\", \"effect-Microsoft.Batch-batchAccounts\": \"Deny\", \"effect-Microsoft.BotService-botServices\": \"Deny\", \"effect-Microsoft.Cache-Redis\": \"Deny\", \"effect-Microsoft.CognitiveServices-accounts\": \"Deny\", \"effect-Microsoft.Compute-disks\": \"Audit\", \"effect-Microsoft.ContainerRegistry-registries\": \"Deny\", \"effect-Microsoft.DBforMariaDB-servers\": \"Deny\", \"effect-Microsoft.DBforMySQL-flexibleServers\": \"Deny\", \"effect-Microsoft.DBforMySQL-servers\": \"Deny\", \"effect-Microsoft.DBforPostgreSQL-flexibleServers\": \"Deny\", \"effect-Microsoft.DBforPostgreSQL-servers\": \"Deny\", \"effect-Microsoft.DataFactory-factories\": \"Deny\", \"effect-Microsoft.Databricks-workspaces\": \"Deny\", \"effect-Microsoft.Devices-IotHubProvisioningService\": \"Deny\", \"effect-Microsoft.Devices-IotHubs\": \"Deny\", \"effect-Microsoft.DocumentDB-databaseAccounts\": \"Deny\", \"effect-Microsoft.EventGrid-domains\": \"Deny\", \"effect-Microsoft.EventGrid-topics\": \"Deny\", \"effect-Microsoft.HybridCompute-privateLinkScopes\": \"Deny\", \"effect-Microsoft.Insights-applicationInsights\": \"Deny\", \"effect-Microsoft.KeyVault-vaults\": \"Deny\", \"effect-Microsoft.MachineLearningServices-workspaces\": \"Deny\", \"effect-Microsoft.Media-mediaServices\": \"Deny\", \"effect-Microsoft.OperationalInsights-LogAnalytics\": \"Deny\", \"effect-Microsoft.SQL-servers\": \"Deny\", \"effect-Microsoft.Search-searchServices\": \"Deny\", \"effect-Microsoft.ServiceBus-namespaces\": \"Deny\", \"effect-Microsoft.SignalRService-SignalR\": \"Deny\", \"effect-Microsoft.SignalRService-webPubSub\": \"Deny\", \"effect-Microsoft.Storage-storageAccounts\": \"Deny\", \"effect-Microsoft.Synapse-workspaces\": \"Deny\", \"effect-VpnGateway\": \"Deny\"}, \"policyExemptionIds\": [], \"policyEnrollmentIds\": []}}]}"
+    },
+    {
+      "key": "apiManagement",
+      "description": "Developer API Management service with public network access enabled",
+      "resourceType": "Microsoft.ApiManagement/service",
+      "expectedOutcome": "Denied",
+      "actualOutcome": "Denied",
+      "status": "Passed",
+      "expectedPolicyDefinitionName": "audit-deny-apim-public-network-access-eny20261008b",
+      "deploymentName": "deny-apiManagement-eny20261008b",
+      "startedAt": "2026-10-08T17:51:21.3947069Z",
+      "completedAt": "2026-10-08T17:51:36.8331840Z",
+      "durationSeconds": 15.438,
+      "azureCliExitCode": 1,
+      "errorCode": "InvalidTemplateDeployment",
+      "evidence": "ERROR: {\"code\": \"InvalidTemplateDeployment\", \"message\": \"The template deployment failed because of policy violation. Please see details for more information.\"}\r\n\r\nInner Errors: \r\n{\"code\": \"RequestDisallowedByPolicy\", \"target\": \"apim-deny-fgl5yhcwlnqgi\", \"message\": \"Resource 'apim-deny-fgl5yhcwlnqgi' was disallowed by policy. Policy identifiers: '[{\\\"policyAssignment\\\":{\\\"name\\\":\\\"Public IP deny test eny20261008b\\\",\\\"id\\\":\\\"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/resourceGroups/rg-public-ip-deny-eny20261008b/providers/Microsoft.Authorization/policyAssignments/deny-public-ip-eny20261008b\\\"},\\\"policyDefinition\\\":{\\\"name\\\":\\\"API Management services should disable public network access\\\",\\\"id\\\":\\\"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/providers/Microsoft.Authorization/policyDefinitions/audit-deny-apim-public-network-access-eny20261008b\\\",\\\"version\\\":\\\"1.0.0\\\"},\\\"policySetDefinition\\\":{\\\"name\\\":\\\"Deny Public Network Access - Test eny20261008b\\\",\\\"id\\\":\\\"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/providers/Microsoft.Authorization/policySetDefinitions/deny-public-ip-smoke-eny20261008b\\\",\\\"version\\\":\\\"1.0.0\\\"}}]'.\", \"additionalInfo\": [{\"type\": \"PolicyViolation\", \"info\": {\"evaluationDetails\": {\"evaluatedExpressions\": [{\"result\": \"True\", \"expressionKind\": \"Field\", \"expression\": \"type\", \"path\": \"type\", \"expressionValue\": \"Microsoft.ApiManagement/service\", \"targetValue\": \"Microsoft.ApiManagement/service\", \"operator\": \"Equals\"}, {\"result\": \"True\", \"expressionKind\": \"Field\", \"expression\": \"Microsoft.ApiManagement/service/publicNetworkAccess\", \"path\": \"properties.publicNetworkAccess\", \"expressionValue\": \"Enabled\", \"targetValue\": \"Disabled\", \"operator\": \"NotEquals\"}]}, \"policyDefinitionId\": \"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/providers/Microsoft.Authorization/policyDefinitions/audit-deny-apim-public-network-access-eny20261008b\", \"policySetDefinitionId\": \"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/providers/Microsoft.Authorization/policySetDefinitions/deny-public-ip-smoke-eny20261008b\", \"policyDefinitionReferenceId\": \"AuditDenyApiManagementPublicNetworkAccess\", \"policySetDefinitionName\": \"deny-public-ip-smoke-eny20261008b\", \"policySetDefinitionDisplayName\": \"Deny Public Network Access - Test eny20261008b\", \"policySetDefinitionVersion\": \"1.0.0\", \"policyDefinitionName\": \"audit-deny-apim-public-network-access-eny20261008b\", \"policyDefinitionDisplayName\": \"API Management services should disable public network access\", \"policyDefinitionVersion\": \"1.0.0\", \"policyDefinitionEffect\": \"Deny\", \"policyAssignmentId\": \"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/resourceGroups/rg-public-ip-deny-eny20261008b/providers/Microsoft.Authorization/policyAssignments/deny-public-ip-eny20261008b\", \"policyAssignmentName\": \"deny-public-ip-eny20261008b\", \"policyAssignmentDisplayName\": \"Public IP deny test eny20261008b\", \"policyAssignmentScope\": \"/subscriptions/3ec06fc7-1fa1-4d12-b1df-33f5a5153d0a/resourceGroups/rg-public-ip-deny-eny20261008b\", \"policyAssignmentParameters\": {\"effect-ApiManagement\": \"Deny\", \"effect-AppServiceEnvironment\": \"Deny\", \"effect-ApplicationGateway\": \"Deny\", \"effect-AzureFirewall\": \"Deny\", \"effect-AzureMonitorPrivateLinkScopes\": \"Deny\", \"effect-ExternalLoadBalancer\": \"Deny\", \"effect-Microsoft.AppConfiguration-configurationStores\": \"Deny\", \"effect-Microsoft.Attestation-attestationProviders\": \"Deny\", \"effect-Microsoft.Automation-automationAccounts\": \"Deny\", \"effect-Microsoft.Batch-batchAccounts\": \"Deny\", \"effect-Microsoft.BotService-botServices\": \"Deny\", \"effect-Microsoft.Cache-Redis\": \"Deny\", \"effect-Microsoft.CognitiveServices-accounts\": \"Deny\", \"effect-Microsoft.Compute-disks\": \"Audit\", \"effect-Microsoft.ContainerRegistry-registries\": \"Deny\", \"effect-Microsoft.DBforMariaDB-servers\": \"Deny\", \"effect-Microsoft.DBforMySQL-flexibleServers\": \"Deny\", \"effect-Microsoft.DBforMySQL-servers\": \"Deny\", \"effect-Microsoft.DBforPostgreSQL-flexibleServers\": \"Deny\", \"effect-Microsoft.DBforPostgreSQL-servers\": \"Deny\", \"effect-Microsoft.DataFactory-factories\": \"Deny\", \"effect-Microsoft.Databricks-workspaces\": \"Deny\", \"effect-Microsoft.Devices-IotHubProvisioningService\": \"Deny\", \"effect-Microsoft.Devices-IotHubs\": \"Deny\", \"effect-Microsoft.DocumentDB-databaseAccounts\": \"Deny\", \"effect-Microsoft.EventGrid-domains\": \"Deny\", \"effect-Microsoft.EventGrid-topics\": \"Deny\", \"effect-Microsoft.HybridCompute-privateLinkScopes\": \"Deny\", \"effect-Microsoft.Insights-applicationInsights\": \"Deny\", \"effect-Microsoft.KeyVault-vaults\": \"Deny\", \"effect-Microsoft.MachineLearningServices-workspaces\": \"Deny\", \"effect-Microsoft.Media-mediaServices\": \"Deny\", \"effect-Microsoft.OperationalInsights-LogAnalytics\": \"Deny\", \"effect-Microsoft.SQL-servers\": \"Deny\", \"effect-Microsoft.Search-searchServices\": \"Deny\", \"effect-Microsoft.ServiceBus-namespaces\": \"Deny\", \"effect-Microsoft.SignalRService-SignalR\": \"Deny\", \"effect-Microsoft.SignalRService-webPubSub\": \"Deny\", \"effect-Microsoft.Storage-storageAccounts\": \"Deny\", \"effect-Microsoft.Synapse-workspaces\": \"Deny\", \"effect-VpnGateway\": \"Deny\"}, \"policyExemptionIds\": [], \"policyEnrollmentIds\": []}}]}"
+    }
+  ]
+}

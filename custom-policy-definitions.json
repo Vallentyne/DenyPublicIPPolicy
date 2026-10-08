@@ -1,0 +1,261 @@
+[
+  {
+    "name": "audit-deny-vpn-gateway-public-ip",
+    "referenceId": "AuditDenyVpnGatewayPublicIp",
+    "initiativeParameter": "Effect-VpnGateway",
+    "properties": {
+      "policyType": "Custom",
+      "mode": "Indexed",
+      "displayName": "Azure VPN gateways should not use public IP addresses",
+      "description": "Audits or denies VPN virtual network gateways with one or more public IP address references.",
+      "metadata": {
+        "category": "Network",
+        "version": "1.0.0"
+      },
+      "parameters": {
+        "effect": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Effect",
+            "description": "Audit, deny, or disable this public network access policy."
+          },
+          "allowedValues": [
+            "Audit",
+            "Deny",
+            "Disabled"
+          ],
+          "defaultValue": "Audit"
+        }
+      },
+      "policyRule": {
+        "if": {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.Network/virtualNetworkGateways"
+            },
+            {
+              "field": "Microsoft.Network/virtualNetworkGateways/gatewayType",
+              "equals": "Vpn"
+            },
+            {
+              "field": "Microsoft.Network/virtualNetworkGateways/ipConfigurations[*].publicIPAddress.id",
+              "exists": true
+            }
+          ]
+        },
+        "then": {
+          "effect": "[parameters('effect')]"
+        }
+      }
+    }
+  },
+  {
+    "name": "audit-deny-azure-firewall-public-ip",
+    "referenceId": "AuditDenyAzureFirewallPublicIp",
+    "initiativeParameter": "Effect-AzureFirewall",
+    "properties": {
+      "policyType": "Custom",
+      "mode": "Indexed",
+      "displayName": "Azure Firewalls should not use public IP addresses",
+      "description": "Audits or denies Azure Firewalls with public, management, or secured virtual hub public IP addresses.",
+      "metadata": {
+        "category": "Network",
+        "version": "1.0.0"
+      },
+      "parameters": {
+        "effect": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Effect",
+            "description": "Audit, deny, or disable this public network access policy."
+          },
+          "allowedValues": [
+            "Audit",
+            "Deny",
+            "Disabled"
+          ],
+          "defaultValue": "Audit"
+        }
+      },
+      "policyRule": {
+        "if": {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.Network/azureFirewalls"
+            },
+            {
+              "anyOf": [
+                {
+                  "field": "Microsoft.Network/azureFirewalls/ipConfigurations[*].publicIPAddress.id",
+                  "exists": true
+                },
+                {
+                  "field": "Microsoft.Network/azureFirewalls/managementIpConfiguration.publicIPAddress.id",
+                  "exists": true
+                },
+                {
+                  "field": "Microsoft.Network/azureFirewalls/hubIpAddresses.publicIPAddresses[*].address",
+                  "exists": true
+                }
+              ]
+            }
+          ]
+        },
+        "then": {
+          "effect": "[parameters('effect')]"
+        }
+      }
+    }
+  },
+  {
+    "name": "audit-deny-application-gateway-public-ip",
+    "referenceId": "AuditDenyApplicationGatewayPublicIp",
+    "initiativeParameter": "Effect-ApplicationGateway",
+    "properties": {
+      "policyType": "Custom",
+      "mode": "Indexed",
+      "displayName": "Application Gateways should not use public frontend IP addresses",
+      "description": "Audits or denies Application Gateways with one or more public frontend IP address references.",
+      "metadata": {
+        "category": "Network",
+        "version": "1.0.0"
+      },
+      "parameters": {
+        "effect": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Effect",
+            "description": "Audit, deny, or disable this public network access policy."
+          },
+          "allowedValues": [
+            "Audit",
+            "Deny",
+            "Disabled"
+          ],
+          "defaultValue": "Audit"
+        }
+      },
+      "policyRule": {
+        "if": {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.Network/applicationGateways"
+            },
+            {
+              "field": "Microsoft.Network/applicationGateways/frontendIPConfigurations[*].publicIPAddress.id",
+              "exists": true
+            }
+          ]
+        },
+        "then": {
+          "effect": "[parameters('effect')]"
+        }
+      }
+    }
+  },
+  {
+    "name": "audit-deny-load-balancer-public-frontend",
+    "referenceId": "AuditDenyExternalLoadBalancerPublicFrontend",
+    "initiativeParameter": "Effect-ExternalLoadBalancer",
+    "properties": {
+      "policyType": "Custom",
+      "mode": "Indexed",
+      "displayName": "Load Balancers should not use public frontend IP configurations",
+      "description": "Audits or denies external Load Balancers that use a public IP address or public IP prefix.",
+      "metadata": {
+        "category": "Network",
+        "version": "1.0.0"
+      },
+      "parameters": {
+        "effect": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Effect",
+            "description": "Audit, deny, or disable this public network access policy."
+          },
+          "allowedValues": [
+            "Audit",
+            "Deny",
+            "Disabled"
+          ],
+          "defaultValue": "Audit"
+        }
+      },
+      "policyRule": {
+        "if": {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.Network/loadBalancers"
+            },
+            {
+              "anyOf": [
+                {
+                  "field": "Microsoft.Network/loadBalancers/frontendIPConfigurations[*].publicIPAddress.id",
+                  "exists": true
+                },
+                {
+                  "field": "Microsoft.Network/loadBalancers/frontendIPConfigurations[*].publicIPPrefix.id",
+                  "exists": true
+                }
+              ]
+            }
+          ]
+        },
+        "then": {
+          "effect": "[parameters('effect')]"
+        }
+      }
+    }
+  },
+  {
+    "name": "audit-deny-apim-public-network-access",
+    "referenceId": "AuditDenyApiManagementPublicNetworkAccess",
+    "initiativeParameter": "Effect-ApiManagement",
+    "properties": {
+      "policyType": "Custom",
+      "mode": "Indexed",
+      "displayName": "API Management services should disable public network access",
+      "description": "Audits or denies API Management services unless public network access is disabled.",
+      "metadata": {
+        "category": "API Management",
+        "version": "1.0.0"
+      },
+      "parameters": {
+        "effect": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Effect",
+            "description": "Audit, deny, or disable this public network access policy."
+          },
+          "allowedValues": [
+            "Audit",
+            "Deny",
+            "Disabled"
+          ],
+          "defaultValue": "Audit"
+        }
+      },
+      "policyRule": {
+        "if": {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.ApiManagement/service"
+            },
+            {
+              "field": "Microsoft.ApiManagement/service/publicNetworkAccess",
+              "notEquals": "Disabled"
+            }
+          ]
+        },
+        "then": {
+          "effect": "[parameters('effect')]"
+        }
+      }
+    }
+  }
+]

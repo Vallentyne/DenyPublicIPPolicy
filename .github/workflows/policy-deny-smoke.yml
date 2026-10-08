@@ -1,0 +1,82 @@
+name: Policy deny smoke test
+
+on:
+  workflow_dispatch:
+    inputs:
+      location:
+        description: Azure region for disposable resources
+        required: true
+        default: canadacentral
+        type: string
+      propagation_delay_seconds:
+        description: Seconds to wait after policy assignment
+        required: true
+        default: '120'
+        type: string
+      keep_on_failure:
+        description: Retain a failed environment for diagnosis
+        required: true
+        default: false
+        type: boolean
+  schedule:
+    - cron: '0 6 * * 1'
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: public-ip-policy-deny-smoke
+  cancel-in-progress: false
+
+jobs:
+  deny-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: deny-policy-smoke
+    env:
+      LOCATION: ${{ inputs.location || 'canadacentral' }}
+      PROPAGATION_DELAY_SECONDS: ${{ inputs.propagation_delay_seconds || '120' }}
+      RUN_ID: gha${{ github.run_id }}${{ github.run_attempt }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sign in to Azure with OIDC
+        uses: azure/login@v2
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Run deny smoke test
+        shell: pwsh
+        run: |
+          $parameters = @{
+            Action = 'All'
+            SubscriptionId = '${{ vars.AZURE_SUBSCRIPTION_ID }}'
+            Location = $env:LOCATION
+            PropagationDelaySeconds = [int]$env:PROPAGATION_DELAY_SECONDS
+            RunId = $env:RUN_ID
+          }
+          if ('${{ inputs.keep_on_failure }}' -eq 'true') {
+            $parameters.KeepOnFailure = $true
+          }
+          ./tests/deny/Invoke-DenyTest.ps1 @parameters
+
+      - name: Ensure failed environment is removed
+        if: ${{ failure() && inputs.keep_on_failure != true }}
+        shell: pwsh
+        run: |
+          ./tests/deny/Invoke-DenyTest.ps1 `
+            -Action Destroy `
+            -SubscriptionId '${{ vars.AZURE_SUBSCRIPTION_ID }}' `
+            -RunId $env:RUN_ID
+
+      - name: Upload deny test result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-ip-deny-${{ github.run_id }}-${{ github.run_attempt }}
+          path: tests/deny/results/*.json
+          if-no-files-found: warn
+          retention-days: 90

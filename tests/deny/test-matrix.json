@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "harnessVersion": "1.0.0",
+  "tests": [
+    {
+      "key": "loadBalancer",
+      "resourceType": "Microsoft.Network/loadBalancers",
+      "policyDefinitionName": "audit-deny-load-balancer-public-frontend",
+      "description": "External Standard Load Balancer with a public frontend IP configuration"
+    },
+    {
+      "key": "applicationGateway",
+      "resourceType": "Microsoft.Network/applicationGateways",
+      "policyDefinitionName": "audit-deny-application-gateway-public-ip",
+      "description": "Standard_v2 Application Gateway with a public frontend IP configuration"
+    },
+    {
+      "key": "apiManagement",
+      "resourceType": "Microsoft.ApiManagement/service",
+      "policyDefinitionName": "audit-deny-apim-public-network-access",
+      "description": "Developer API Management service with public network access enabled"
+    }
+  ]
+}
