@@ -36,6 +36,7 @@ $MainTemplate = Join-Path $RepoRoot 'main.bicep'
 $MainParameters = Join-Path $RepoRoot 'main.bicepparam'
 $SourceInitiativePath = Join-Path $RepoRoot 'built-in-audit-public-network-access.json'
 $CustomDefinitionsPath = Join-Path $RepoRoot 'custom-policy-definitions.json'
+$RuleTestsPath = Join-Path $RepoRoot 'tests/Test-PublicNetworkAccess.ps1'
 $TestMatrix = Get-Content -LiteralPath $MatrixPath -Raw | ConvertFrom-Json -Depth 20
 
 . (Join-Path $PSScriptRoot 'Assert-TestSubscription.ps1')
@@ -111,7 +112,7 @@ function Assert-AzureContext {
 function Invoke-Validation {
     Write-Step 'Running deny harness validation'
 
-    if ($TestMatrix.schemaVersion -ne 1 -or $TestMatrix.harnessVersion -ne '1.0.0') {
+    if ($TestMatrix.schemaVersion -ne 1 -or $TestMatrix.harnessVersion -ne '1.1.0') {
         throw 'Unsupported deny test matrix schema or harness version.'
     }
 
@@ -121,8 +122,8 @@ function Invoke-Validation {
     }
 
     $customDefinitions = @(Get-Content -LiteralPath $CustomDefinitionsPath -Raw | ConvertFrom-Json -Depth 100)
-    if ($customDefinitions.Count -ne 5) {
-        throw "Expected five custom policy definitions, found $($customDefinitions.Count)."
+    if ($customDefinitions.Count -ne 10) {
+        throw "Expected ten custom policy definitions, found $($customDefinitions.Count)."
     }
     foreach ($definition in $customDefinitions) {
         if ('Deny' -notin @($definition.properties.parameters.effect.allowedValues)) {
@@ -142,6 +143,7 @@ function Invoke-Validation {
     }
 
     & (Join-Path $PSScriptRoot 'Test-TestSubscription.ps1')
+    & $RuleTestsPath
     foreach ($template in @($MainTemplate, $PolicyTemplate, $ResourceTemplate)) {
         $null = Invoke-AzCli -Arguments @('bicep', 'build', '--file', $template, '--stdout')
         Write-Host "  [PASS] $(Split-Path $template -Leaf)"
@@ -218,8 +220,8 @@ function Get-TestContext {
             $testRunProperty = $_.metadata.PSObject.Properties['testRunId']
             $testRunProperty -and $testRunProperty.Value -eq $NameSuffix
         })
-    if ($definitions.Count -ne 5) {
-        throw "Expected five custom definitions for run '$NameSuffix', found $($definitions.Count)."
+    if ($definitions.Count -ne 10) {
+        throw "Expected ten custom definitions for run '$NameSuffix', found $($definitions.Count)."
     }
 
     $parameterValues = [ordered]@{}
@@ -390,7 +392,7 @@ function Get-ToolVersions {
 
 function Get-ArtifactVersions {
     $artifacts = [ordered]@{}
-    foreach ($path in @($MainTemplate, $MainParameters, $SourceInitiativePath, $CustomDefinitionsPath, $PolicyTemplate, $ResourceTemplate, $MatrixPath)) {
+    foreach ($path in @($MainTemplate, $MainParameters, $SourceInitiativePath, $CustomDefinitionsPath, $PolicyTemplate, $ResourceTemplate, $MatrixPath, $RuleTestsPath)) {
         $relativePath = [System.IO.Path]::GetRelativePath($RepoRoot, $path).Replace('\', '/')
         $artifacts[$relativePath] = (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLowerInvariant()
     }

@@ -41,6 +41,41 @@ param effectExternalLoadBalancers string = 'Audit'
 ])
 param effectApiManagement string = 'Audit'
 
+@allowed([
+  'Audit'
+  'Deny'
+  'Disabled'
+])
+param effectNatGateways string = 'Deny'
+
+@allowed([
+  'Audit'
+  'Deny'
+  'Disabled'
+])
+param effectBastion string = 'Deny'
+
+@allowed([
+  'Audit'
+  'Deny'
+  'Disabled'
+])
+param effectRouteServer string = 'Deny'
+
+@allowed([
+  'Audit'
+  'Deny'
+  'Disabled'
+])
+param effectApiManagementExternal string = 'Deny'
+
+@allowed([
+  'Audit'
+  'Deny'
+  'Disabled'
+])
+param effectFrontDoor string = 'Deny'
+
 var sourceInitiative = loadJsonContent('./built-in-audit-public-network-access.json')
 var customDefinitions = loadJsonContent('./custom-policy-definitions.json')
 
@@ -78,10 +113,10 @@ resource customInitiative 'Microsoft.Authorization/policySetDefinitions@2023-04-
   properties: {
     policyType: 'Custom'
     displayName: initiativeDisplayName
-    description: 'Extends the built-in Audit Public Network Access initiative version ${sourceInitiative.metadata.version} with VPN Gateway, Azure Firewall, Application Gateway, external Load Balancer, and API Management checks.'
+    description: 'Extends the built-in Audit Public Network Access initiative version ${sourceInitiative.metadata.version} with VPN Gateway, Azure Firewall, Application Gateway, external Load Balancer, API Management, NAT Gateway, public Bastion, Route Server, APIM External mode, and Front Door checks.'
     metadata: {
       category: 'Network'
-      version: '1.0.0'
+      version: '1.1.0'
       sourcePolicySetDefinitionId: sourceInitiative.id
       sourcePolicySetDefinitionVersion: sourceInitiative.metadata.version
     }
@@ -100,6 +135,21 @@ resource customInitiative 'Microsoft.Authorization/policySetDefinitions@2023-04-
       })
       'Effect-ApiManagement': union(effectParameterDefinition, {
         defaultValue: effectApiManagement
+      })
+      'Effect-NatGateway': union(effectParameterDefinition, {
+        defaultValue: effectNatGateways
+      })
+      'Effect-Bastion': union(effectParameterDefinition, {
+        defaultValue: effectBastion
+      })
+      'Effect-RouteServer': union(effectParameterDefinition, {
+        defaultValue: effectRouteServer
+      })
+      'Effect-ApiManagementExternal': union(effectParameterDefinition, {
+        defaultValue: effectApiManagementExternal
+      })
+      'Effect-FrontDoor': union(effectParameterDefinition, {
+        defaultValue: effectFrontDoor
       })
     })
     policyDefinitions: concat(sourceInitiative.policyDefinitions, customPolicyReferences)

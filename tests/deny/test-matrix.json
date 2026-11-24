@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "harnessVersion": "1.0.0",
+  "harnessVersion": "1.1.0",
   "tests": [
     {
       "key": "loadBalancer",

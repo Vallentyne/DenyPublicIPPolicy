@@ -257,5 +257,272 @@
         }
       }
     }
+  },
+  {
+    "name": "audit-deny-nat-gateway-public-ip",
+    "referenceId": "AuditDenyNatGatewayPublicIp",
+    "initiativeParameter": "Effect-NatGateway",
+    "properties": {
+      "policyType": "Custom",
+      "mode": "Indexed",
+      "displayName": "NAT gateways should not use public IP addresses",
+      "description": "Audits or denies NAT gateways with public IPv4 or IPv6 address or prefix associations.",
+      "metadata": {
+        "category": "Network",
+        "version": "1.0.0"
+      },
+      "parameters": {
+        "effect": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Effect",
+            "description": "Audit, deny, or disable this public network access policy."
+          },
+          "allowedValues": ["Audit", "Deny", "Disabled"],
+          "defaultValue": "Audit"
+        }
+      },
+      "policyRule": {
+        "if": {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.Network/natGateways"
+            },
+            {
+              "anyOf": [
+                {
+                  "count": {
+                    "field": "Microsoft.Network/natGateways/publicIpAddresses[*]"
+                  },
+                  "greater": 0
+                },
+                {
+                  "count": {
+                    "field": "Microsoft.Network/natGateways/publicIpPrefixes[*]"
+                  },
+                  "greater": 0
+                },
+                {
+                  "count": {
+                    "field": "Microsoft.Network/natGateways/publicIpAddressesV6[*]"
+                  },
+                  "greater": 0
+                },
+                {
+                  "count": {
+                    "field": "Microsoft.Network/natGateways/publicIpPrefixesV6[*]"
+                  },
+                  "greater": 0
+                }
+              ]
+            }
+          ]
+        },
+        "then": {
+          "effect": "[parameters('effect')]"
+        }
+      }
+    }
+  },
+  {
+    "name": "audit-deny-bastion-public-access",
+    "referenceId": "AuditDenyBastionPublicAccess",
+    "initiativeParameter": "Effect-Bastion",
+    "properties": {
+      "policyType": "Custom",
+      "mode": "Indexed",
+      "displayName": "Azure Bastion hosts should use private-only deployments",
+      "description": "Audits or denies Bastion hosts unless private-only Bastion is enabled. Private-only Premium deployments are allowed; public and Developer deployments are not.",
+      "metadata": {
+        "category": "Network",
+        "version": "1.0.0"
+      },
+      "parameters": {
+        "effect": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Effect",
+            "description": "Audit, deny, or disable this public network access policy."
+          },
+          "allowedValues": ["Audit", "Deny", "Disabled"],
+          "defaultValue": "Audit"
+        }
+      },
+      "policyRule": {
+        "if": {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.Network/bastionHosts"
+            },
+            {
+              "field": "Microsoft.Network/bastionHosts/enablePrivateOnlyBastion",
+              "notEquals": true
+            }
+          ]
+        },
+        "then": {
+          "effect": "[parameters('effect')]"
+        }
+      }
+    }
+  },
+  {
+    "name": "audit-deny-route-server-public-ip",
+    "referenceId": "AuditDenyRouteServerPublicIp",
+    "initiativeParameter": "Effect-RouteServer",
+    "properties": {
+      "policyType": "Custom",
+      "mode": "All",
+      "displayName": "Azure Route Servers should not be deployed",
+      "description": "Audits or denies standalone virtual hubs (Route Servers, which require a public management IP) and public IP configurations on virtual hubs. Virtual WAN-connected hubs are not denied by the parent rule.",
+      "metadata": {
+        "category": "Network",
+        "version": "1.0.0"
+      },
+      "parameters": {
+        "effect": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Effect",
+            "description": "Audit, deny, or disable this public network access policy."
+          },
+          "allowedValues": ["Audit", "Deny", "Disabled"],
+          "defaultValue": "Audit"
+        }
+      },
+      "policyRule": {
+        "if": {
+          "anyOf": [
+            {
+              "allOf": [
+                {
+                  "field": "type",
+                  "equals": "Microsoft.Network/virtualHubs"
+                },
+                {
+                  "field": "Microsoft.Network/virtualHubs/virtualWan.id",
+                  "exists": false
+                }
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "field": "type",
+                  "equals": "Microsoft.Network/virtualHubs/ipConfigurations"
+                },
+                {
+                  "field": "Microsoft.Network/virtualHubs/ipConfigurations/publicIPAddress.id",
+                  "exists": true
+                }
+              ]
+            }
+          ]
+        },
+        "then": {
+          "effect": "[parameters('effect')]"
+        }
+      }
+    }
+  },
+  {
+    "name": "audit-deny-apim-external-mode",
+    "referenceId": "AuditDenyApiManagementExternalMode",
+    "initiativeParameter": "Effect-ApiManagementExternal",
+    "properties": {
+      "policyType": "Custom",
+      "mode": "Indexed",
+      "displayName": "API Management services should not use External virtual network mode",
+      "description": "Audits or denies API Management services using External virtual network mode. Internal and None modes are not targeted by this rule.",
+      "metadata": {
+        "category": "API Management",
+        "version": "1.0.0"
+      },
+      "parameters": {
+        "effect": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Effect",
+            "description": "Audit, deny, or disable this public network access policy."
+          },
+          "allowedValues": ["Audit", "Deny", "Disabled"],
+          "defaultValue": "Audit"
+        }
+      },
+      "policyRule": {
+        "if": {
+          "allOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.ApiManagement/service"
+            },
+            {
+              "field": "Microsoft.ApiManagement/service/virtualNetworkType",
+              "equals": "External"
+            }
+          ]
+        },
+        "then": {
+          "effect": "[parameters('effect')]"
+        }
+      }
+    }
+  },
+  {
+    "name": "audit-deny-front-door",
+    "referenceId": "AuditDenyFrontDoor",
+    "initiativeParameter": "Effect-FrontDoor",
+    "properties": {
+      "policyType": "Custom",
+      "mode": "All",
+      "displayName": "Azure Front Door should not be deployed",
+      "description": "Audits or denies Front Door Classic, Standard and Premium profiles, and Front Door endpoints on existing profiles. Other CDN profile SKUs are not targeted. Private Link to an origin does not make the Front Door frontend private.",
+      "metadata": {
+        "category": "Network",
+        "version": "1.0.0"
+      },
+      "parameters": {
+        "effect": {
+          "type": "String",
+          "metadata": {
+            "displayName": "Effect",
+            "description": "Audit, deny, or disable this public network access policy."
+          },
+          "allowedValues": ["Audit", "Deny", "Disabled"],
+          "defaultValue": "Audit"
+        }
+      },
+      "policyRule": {
+        "if": {
+          "anyOf": [
+            {
+              "field": "type",
+              "equals": "Microsoft.Network/frontDoors"
+            },
+            {
+              "allOf": [
+                {
+                  "field": "type",
+                  "equals": "Microsoft.Cdn/profiles"
+                },
+                {
+                  "field": "Microsoft.CDN/profiles/sku.name",
+                  "in": ["Standard_AzureFrontDoor", "Premium_AzureFrontDoor"]
+                }
+              ]
+            },
+            {
+              "field": "type",
+              "equals": "Microsoft.Cdn/profiles/afdEndpoints"
+            }
+          ]
+        },
+        "then": {
+          "effect": "[parameters('effect')]"
+        }
+      }
+    }
   }
 ]

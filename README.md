@@ -11,8 +11,15 @@ The checked-in source snapshot is version **4.3.0**. The deployment preserves it
 - Application Gateways
 - External Load Balancers
 - API Management services
+- NAT gateways with public IPv4 or IPv6 address or prefix associations
+- Public Bastion hosts (private-only Bastion is allowed)
+- Route Servers and public IP configurations on virtual hubs
+- API Management services using External virtual network mode
+- Azure Front Door Classic, Standard, Premium, and endpoints on existing profiles
 
-Each added policy accepts `Audit`, `Deny`, or `Disabled`. The parameter file defaults all five to `Audit`.
+Policy version **1.1.0** contains **44 references**: the original 34 built-ins and ten custom policies, matching the EPAC coverage.
+
+Each custom policy accepts `Audit`, `Deny`, or `Disabled`. The template and parameter file keep the original five checks at `Audit` and default the five additions (NAT Gateway, Bastion, Route Server, APIM External mode, and Front Door) to **`Deny`**, matching the EPAC assignment. Individual custom policy definitions retain `Audit` defaults when used outside this initiative.
 
 ## Important enforcement considerations
 
@@ -20,6 +27,12 @@ Each added policy accepts `Audit`, `Deny`, or `Disabled`. The parameter file def
 - Azure Firewall public IP requirements vary by architecture. Validate forced-tunneling and secured virtual hub designs before selecting `Deny`.
 - Changing an initiative parameter to `Deny` affects new or updated resources. Existing noncompliant resources remain visible but are not automatically remediated.
 - The API Management policy evaluates the service-level `publicNetworkAccess` property. This is broader than the built-in policy that audits individual service configuration endpoints.
+- NAT gateways are denied when a public IP address or prefix is associated, not simply because an empty NAT gateway exists.
+- The Bastion check requires `enablePrivateOnlyBastion` to be true; public and Developer deployments are denied.
+- The Route Server check denies standalone virtual hubs and public IP configurations on virtual hubs. Virtual WAN-connected parent hubs are not targeted.
+- The APIM External-mode check is independent of the existing public network access check.
+- Front Door is denied even when its origin uses Private Link; unrelated CDN profile SKUs are not targeted.
+- Updating an existing assignment that omits the five new effect parameters will use the new `Deny` defaults. Review assignment parameters and exemptions before rollout.
 
 ## Validate
 
@@ -54,14 +67,16 @@ The template creates the definitions and initiative only. Assign the resulting i
 
 The deny harness follows the disposable test pattern used by the PrivateLink DNS policy set. It is hard-locked to the `covallen3-dnstest` subscription and performs these steps:
 
-1. Validates the Bicep templates, test matrix, shared policy definitions, and subscription guard.
-2. Creates run-specific copies of the five custom policy definitions and the full policy initiative at subscription scope.
+1. Validates the Bicep templates, test matrix, shared policy definitions, offline rule cases, and subscription guard.
+2. Creates run-specific copies of the ten custom policy definitions and the full policy initiative at subscription scope.
 3. Creates a disposable resource group and assigns the initiative to it.
 4. Sets every initiative parameter that supports `Deny` to `Deny`.
 5. Keeps `Effect-Microsoft.Compute-disks` at `Audit`, because the Microsoft built-in definition only accepts `Audit` or `Disabled`.
 6. Attempts deployments for an external Load Balancer, Application Gateway, and API Management service.
 7. Passes each assertion only when Azure returns a policy denial from the expected run-specific custom definition.
 8. Writes a versioned JSON result and removes the assignment, resource group, policy set, custom definitions, and deployment record.
+
+The five additional checks have offline positive and negative rule tests. The live deployment matrix still covers only external Load Balancer, Application Gateway, and API Management public network access; it does not yet verify Azure enforcement of the five additions.
 
 Run static validation without changing Azure:
 

@@ -53,8 +53,8 @@ resource testInitiative 'Microsoft.Authorization/policySetDefinitions@2023-04-01
     description: 'Disposable deny-effect test copy of Audit Public Network Access ${sourceInitiative.metadata.version}.'
     metadata: {
       category: 'Network'
-      version: '1.0.0-test'
-      harnessVersion: '1.0.0'
+      version: '1.1.0-test'
+      harnessVersion: '1.1.0'
       testRunId: nameSuffix
       sourcePolicySetDefinitionId: sourceInitiative.id
       sourcePolicySetDefinitionVersion: sourceInitiative.metadata.version
@@ -65,6 +65,11 @@ resource testInitiative 'Microsoft.Authorization/policySetDefinitions@2023-04-01
       'Effect-ApplicationGateway': effectParameterDefinition
       'Effect-ExternalLoadBalancer': effectParameterDefinition
       'Effect-ApiManagement': effectParameterDefinition
+      'Effect-NatGateway': effectParameterDefinition
+      'Effect-Bastion': effectParameterDefinition
+      'Effect-RouteServer': effectParameterDefinition
+      'Effect-ApiManagementExternal': effectParameterDefinition
+      'Effect-FrontDoor': effectParameterDefinition
     })
     policyDefinitions: concat(sourceInitiative.policyDefinitions, customPolicyReferences)
   }
