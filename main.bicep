@@ -1,10 +1,10 @@
 targetScope = 'managementGroup'
 
 @description('Resource name of the custom policy initiative.')
-param initiativeName string = 'audit-public-network-access-custom'
+param initiativeName string = 'custom-audit-public-network-access'
 
 @description('Display name of the custom policy initiative.')
-param initiativeDisplayName string = 'Audit Public Network Access - Custom'
+param initiativeDisplayName string = 'Custom - Audit Public Network Access'
 
 @allowed([
   'Audit'

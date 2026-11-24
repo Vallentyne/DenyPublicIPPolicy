@@ -1,7 +1,7 @@
 using './main.bicep'
 
-param initiativeName = 'audit-public-network-access-custom'
-param initiativeDisplayName = 'Audit Public Network Access - Custom'
+param initiativeName = 'custom-audit-public-network-access'
+param initiativeDisplayName = 'Custom - Audit Public Network Access'
 
 param effectVpnGateways = 'Audit'
 param effectAzureFirewalls = 'Audit'
